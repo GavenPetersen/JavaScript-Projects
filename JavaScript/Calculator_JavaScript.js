@@ -31,9 +31,12 @@ function Handle_Operator(Next_Operator) {
         Calculator.First_Operand = Value_of_Input;
     } else if (operator) {
         const Value_Now = First_Operand || 0;
-        const result = Preform_Calculation[operator](Value_of_Input, Value_of_Input);
+        let result = Preform_Calculation[operator](Value_Now, Value_of_Input);
 
-        Calculator.Display_Value = String(result);
+        result = Number(result).toFixed(9)
+
+        result = (result * 1).toString()
+        Calculator.Display_Value = (result);
         Calculator.First_Operand = result;
     }
 
@@ -45,7 +48,7 @@ const Preform_Calculation = {
     '*': (First_Operand, Second_Operand) => First_Operand * Second_Operand,
     '+': (First_Operand, Second_Operand) => First_Operand + Second_Operand,
     '-': (First_Operand, Second_Operand) => First_Operand - Second_Operand,
-    '=': (First_Operand, Second_Operand) => First_Operand
+    '=': (First_Operand, Second_Operand) => Second_Operand
 };
 function Calculator_Reset() {
     Calculator.Display_Value = '0';
@@ -55,13 +58,18 @@ function Calculator_Reset() {
 }
 function Update_Display() {
     const display = document.querySelector('.calculator-screen');
-    display_Value = Calculator.Display_Value;
+    display.value = Calculator.Display_Value;
 }
 Update_Display();
 const keys = document.querySelector('.calculator-keys');
 keys.addEventListener('click', (event) => {
     const { target } = event;
     if (!target.matches('button')) {
+        return;
+    }
+    if (target.classList.contains('operator')) {
+        Handle_Operator(target.value);
+        Update_Display();
         return;
     }
     if (target.classList.contains('decimal')) {

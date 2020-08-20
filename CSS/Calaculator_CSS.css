@@ -9,7 +9,7 @@ html {
     box-sizing: inherit;
 }
 
-.calaculator {
+.calculator {
     border: 1.2px solid darkslategray;
     border-radius: 7px;
     position: absolute;
@@ -18,7 +18,7 @@ html {
     transform: translate(-50%, -50%);
 }
 
-.calaculator-screen {
+.calculator-screen {
     width: 100%;
     font-size: 5rem;
     height: 80px;
@@ -75,7 +75,7 @@ button:hover {
     background-color: darkorange;
 }
 
-.calaculator-keys {
+.calculator-keys {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-gap: 20px;
